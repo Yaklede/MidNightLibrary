@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+      <title>MidNight Library - e Book</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+
+    <link rel="stylesheet" href="/deluxe/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/deluxe/css/animate.css">
+    
+    <link rel="stylesheet" href="/deluxe/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/deluxe/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/deluxe/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="/deluxe/css/aos.css">
+
+    <link rel="stylesheet" href="/deluxe/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/deluxe/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/deluxe/css/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="/deluxe/css/flaticon.css">
+    <link rel="stylesheet" href="/deluxe/css/icomoon.css">
+    <link rel="stylesheet" href="/deluxe/css/style.css">
+    <style>
+ .field-error {
+ border-color: #dc3545;
+ color: #dc3545;
+ }
+ </style>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html" th:href="@{/}">MidNight Library</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a href="index.html" th:href="@{/}" class="nav-link">홈</a></li>
+                    <li class="nav-item"><a href="rooms.html" class="nav-link" th:href="@{/items/new}">상품 등록</a></li>
+                    <li class="nav-item"><a href="rooms.html" class="nav-link" th:href="@{/admin/items}">상품 관리</a></li>
+                    <li class="nav-item"><a href="restaurant.html" class="nav-link" th:href="@{/admin/members}">회원 관리</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link" th:href="@{/admin/orders}">주문 내역</a></li>
+                    <li class="nav-item"><a href="restaurant.html" class="nav-link" th:href="@{/logout}">로그아웃</a></li>
+                </ul>
+            </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+    <div class="hero-wrap" style="background-image: url('/deluxe/images/mainPage.jpg');">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+          <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+          	<div class="text">
+	            <p class="breadcrumbs mb-2" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span>추가로 생성하신 아이템은 확인 후 삭제 바랍니다.</span></p>
+	            <h1 class="mb-4 bread">Book Edit</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section ftco-degree-bg">
+              <!-- END comment-list -->
+              
+              <div class="comment-form-wrap pt-5">
+                <form th:action="@{/items/edit/{itemId} (itemId=${item.id})}" th:object="${item}" method="post" enctype="multipart/form-data" class="p-5 bg-light">
+                  <div class="form-group">
+                    <label th:for="title">Title</label>
+                    <input th:field="*{title}" th:errorclass="field-error" type="text" placeholder="enter your Book Title" class="form-control">
+                    <div class="field-error" th:errors="*{title}"></div>
+                  </div>
+                  <div class="form-group">
+                    <label th:for="author">Author</label>
+                    <input th:field="*{author}" th:errorclass="field-error" type="text" placeholder="enter your Book author" class="form-control">
+                    <div class="field-error" th:errors="*{author}"></div>
+                  </div>
+                  <div class="form-group">
+                    <label th:for="isbn">ISBN</label>
+                    <input th:field="*{isbn}" th:errorclass="field-error" type="text" placeholder="enter your Book isbn" class="form-control">
+                    <div class="field-error" th:errors="*{isbn}"></div>
+                  </div>
+                  <div class="form-group">
+                    <label th:for="price">Price</label>
+                    <input th:field="*{price}" th:errorclass="field-error" type="text" placeholder="enter your Book Price" class="form-control">
+                    <div class="field-error" th:errors="*{price}"></div>
+                  </div>
+                  <div class="form-group">
+                    <label >Img</label>
+                    <input type="file" name="file" class="form-control">
+<!--                      <span class="field-error" th:if="${error == '이미지 넣어 시발년아'}">이미지 넣어 시발년아.</span>-->
+                  </div>
+                  <div class="form-group">
+                    <label th:for="content">Content</label>
+                    <textarea th:field="*{content}" th:inline="text" th:errorclass="field-error" type="text" cols="30" rows="10" placeholder="enter your Book Story" class="form-control"></textarea>
+                    <div class="field-error" th:errors="*{content}"></div>
+                  </div>
+                  <div class="form-group">
+                    <input type="submit" value="edit" class="btn py-3 px-4 btn-primary">
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div> <!-- .col-md-8 -->
+
+        </div>
+      </div>
+    </section> <!-- .section -->
+
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">MidNight Library</h2>
+              <p>The midnight library is a library available at any time.</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Have a Questions?</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">MidNight Library</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">82828282828282828282</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">MidNightLibrary@info.co</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="/deluxe/js/jquery.min.js"></script>
+  <script src="/deluxe/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="/deluxe/js/popper.min.js"></script>
+  <script src="/deluxe/js/bootstrap.min.js"></script>
+  <script src="/deluxe/js/jquery.easing.1.3.js"></script>
+  <script src="/deluxe/js/jquery.waypoints.min.js"></script>
+  <script src="/deluxe/js/jquery.stellar.min.js"></script>
+  <script src="/deluxe/js/owl.carousel.min.js"></script>
+  <script src="/deluxe/js/jquery.magnific-popup.min.js"></script>
+  <script src="/deluxe/js/aos.js"></script>
+  <script src="/deluxe/js/jquery.animateNumber.min.js"></script>
+  <script src="/deluxe/js/bootstrap-datepicker.js"></script>
+  <script src="/deluxe/js/jquery.timepicker.min.js"></script>
+  <script src="/deluxe/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="/deluxe/js/google-map.js"></script>
+  <script src="/deluxe/js/main.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+	  <title>MidNight Library - e Book</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
+
+    <link rel="stylesheet" href="/deluxe/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/deluxe/css/animate.css">
+    
+    <link rel="stylesheet" href="/deluxe/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/deluxe/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/deluxe/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="/deluxe/css/aos.css">
+
+    <link rel="stylesheet" href="/deluxe/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/deluxe/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/deluxe/css/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="/deluxe/css/flaticon.css">
+    <link rel="stylesheet" href="/deluxe/css/icomoon.css">
+    <link rel="stylesheet" href="/deluxe/css/style.css">
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+			<a class="navbar-brand" href="index.html" th:href="@{/}">MidNight Library</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div th:object="${member}" class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li  class="nav-item active"><a href="index.html" class="nav-link" th:href="@{/}">홈</a></li>
+	          <li class="nav-item"><a href="rooms.html" class="nav-link" th:href="@{/user/edit/{memberId} (memberId=${member.id})}">정보 수정</a></li>
+	          <li class="nav-item"><a href="restaurant.html" class="nav-link"th:href="@{/user/orderList/{memberId} (memberId=${member.id})}">주문내역</a></li>
+				<li class="nav-item"><a href="restaurant.html" class="nav-link" th:href="@{/logout}">로그아웃</a></li>
+	          <li class="nav-item"><a href="contact.html" class="nav-link" th:href="@{/}" th:text="|${member.NickName}님|">회원님 반갑습니다.</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+	<section class="home-slider owl-carousel">
+		<a href="#Books">
+		<div class="slider-item" style="background-image:url(deluxe/images/mainPage.jpg);">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row no-gutters slider-text align-items-center justify-content-center">
+					<div class="col-md-12 ftco-animate text-center">
+						<div class="text mb-5 pb-3">
+							<h1 class="mb-3">Welcome To <br> Midnight Library</h1>
+							<h2>E-Books</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</a>
+	</section>
+
+	<section class="ftco-section bg-light" id="Books">
+		<div class="container">
+			<div class="row justify-content-center mb-5 pb-3">
+				<div class="col-md-7 heading-section text-center ftco-animate">
+					<h2 class="mb-4">Books</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div th:each="item : ${items}" th:object="${member}" class="col-sm col-md-6 col-lg-4 ftco-animate">
+					<div class="room">
+						<a th:href="@{/items/List/{itemId}/{memberId} (itemId=${item.id},memberId=${member.Id})}" href="rooms.html" class="img d-flex justify-content-center align-items-center" th:style="'background-image: url(/items/image/' + ${item.id + 1} + ');'">
+							<div class="icon d-flex justify-content-center align-items-center">
+								<span class="icon-search2"></span>
+							</div>
+						</a>
+						<div class="text p-3 text-center">
+							<h3 class="mb-3"><a href="rooms.html" th:text="${item.title}">title</a></h3>
+							<p><span class="price mr-2" th:text="|${#numbers.formatInteger(item.price,3,'COMMA')}원|">$120.00</span> <span class="per" th:text="${item.author}">author</span></p>
+							<hr>
+							<p class="pt-1"><a href="room-single.html" class="btn-custom" th:href="@{/items/List/{itemId}/{memberId} (itemId=${item.id},memberId=${member.Id})}">View Book Details <span class="icon-long-arrow-right"></span></a></p>
+						</div>
+					</div>
+				</div>
+
+	</section>
+
+
+
+	<section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(deluxe/images/bg_1.jpg);">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-10">
+					<div class="row">
+						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+							<div class="block-18 text-center">
+								<div class="text">
+									<strong class="number" data-number="50000">0</strong>
+									<span>Buys</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+							<div class="block-18 text-center">
+								<div class="text">
+									<strong class="number" data-number="3000">0</strong>
+									<span>Members</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+							<div class="block-18 text-center">
+								<div class="text">
+									<strong class="number" data-number="10">0</strong>
+									<span>Staffs</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+							<div class="block-18 text-center">
+								<div class="text">
+									<strong class="number" data-number="100">0</strong>
+									<span>Destination</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="instagram">
+		<div class="container-fluid">
+			<div class="row no-gutters justify-content-center pb-5">
+				<div class="col-md-7 text-center heading-section ftco-animate">
+					<h2><span>Instagram</span></h2>
+				</div>
+			</div>
+			<div class="row no-gutters">
+				<div class="col-sm-12 col-md ftco-animate">
+					<a href="images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(deluxe/images/insta-1.jpg);">
+						<div class="icon d-flex justify-content-center">
+							<span class="icon-instagram align-self-center"></span>
+						</div>
+					</a>
+				</div>
+				<div class="col-sm-12 col-md ftco-animate">
+					<a href="images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(deluxe/images/insta-2.jpg);">
+						<div class="icon d-flex justify-content-center">
+							<span class="icon-instagram align-self-center"></span>
+						</div>
+					</a>
+				</div>
+				<div class="col-sm-12 col-md ftco-animate">
+					<a href="images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(deluxe/images/insta-3.jpg);">
+						<div class="icon d-flex justify-content-center">
+							<span class="icon-instagram align-self-center"></span>
+						</div>
+					</a>
+				</div>
+				<div class="col-sm-12 col-md ftco-animate">
+					<a href="images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(deluxe/images/insta-4.jpg);">
+						<div class="icon d-flex justify-content-center">
+							<span class="icon-instagram align-self-center"></span>
+						</div>
+					</a>
+				</div>
+				<div class="col-sm-12 col-md ftco-animate">
+					<a href="images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(deluxe/images/insta-5.jpg);">
+						<div class="icon d-flex justify-content-center">
+							<span class="icon-instagram align-self-center"></span>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer class="ftco-footer ftco-bg-dark ftco-section">
+		<div class="container">
+			<div class="row mb-5">
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">MidNight Library</h2>
+						<p>The midnight library is a library available at any time.</p>
+						<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+							<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+							<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+							<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Have a Questions?</h2>
+						<div class="block-23 mb-3">
+							<ul>
+								<li><span class="icon icon-map-marker"></span><span class="text">MidNight Library</span></li>
+								<li><a href="#"><span class="icon icon-phone"></span><span class="text">82828282828282828282</span></a></li>
+								<li><a href="#"><span class="icon icon-envelope"></span><span class="text">MidNightLibrary@info.co</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+
+					<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+				</div>
+			</div>
+		</div>
+	</footer>
+    
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="/deluxe/js/jquery.min.js"></script>
+  <script src="/deluxe/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="/deluxe/js/popper.min.js"></script>
+  <script src="/deluxe/js/bootstrap.min.js"></script>
+  <script src="/deluxe/js/jquery.easing.1.3.js"></script>
+  <script src="/deluxe/js/jquery.waypoints.min.js"></script>
+  <script src="/deluxe/js/jquery.stellar.min.js"></script>
+  <script src="/deluxe/js/owl.carousel.min.js"></script>
+  <script src="/deluxe/js/jquery.magnific-popup.min.js"></script>
+  <script src="/deluxe/js/aos.js"></script>
+  <script src="/deluxe/js/jquery.animateNumber.min.js"></script>
+  <script src="/deluxe/js/bootstrap-datepicker.js"></script>
+  <script src="/deluxe/js/jquery.timepicker.min.js"></script>
+  <script src="/deluxe/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="/deluxe/js/google-map.js"></script>
+  <script src="/deluxe/js/main.js"></script>
+    
+  </body>
+</html>

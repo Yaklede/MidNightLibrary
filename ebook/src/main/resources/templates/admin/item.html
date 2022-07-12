@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Items Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/admin/css/bootstrap.min.css" integrity="sha384-
+ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="/admin/css/jumbotron-narrow.css" rel="stylesheet">
+    <link rel="stylesheet" href="/deluxe/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/deluxe/css/animate.css">
+
+    <link rel="stylesheet" href="/deluxe/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/deluxe/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/deluxe/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="/deluxe/css/aos.css">
+
+    <link rel="stylesheet" href="/deluxe/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/deluxe/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/deluxe/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="/deluxe/css/flaticon.css">
+    <link rel="stylesheet" href="/deluxe/css/icomoon.css">
+    <link rel="stylesheet" href="/deluxe/css/style.css">
+</head>
+<body>
+<div class="container">
+    <a class="navbar-brand" href="index.html" th:href="@{/}">MidNight Library</a>
+    <div class="header">
+        <h2>상품관리</h2>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>상품 이름</th>
+            <th>상품 가격</th>
+            <th>저자</th>
+            <th>ISBN</th>
+            <th>상품 수정</th>
+            <th>상품 삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${items}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.title}"></td>
+            <td th:text="${item.price}"></td>
+            <td th:text="${item.author}"></td>
+            <td th:text="${item.isbn}"></td>
+            <td>
+                <form th:action="@{/items/edit/{itemId} (itemId=${item.id})}" method="get">
+                    <button class="btn btn-warning">상품 수정</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/items/delete/{itemId} (itemId=${item.id})}" method="post">
+                    <button class="btn btn-danger">상품 삭제</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div> <!-- /container -->
+</body>

@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:mysql://ls-f5fab03b1ab3141b98b19dfdc7abfc4895385d16.c2c4v6jex7q9.ap-northeast-2.rds.amazonaws.com:3306/ebook
+    username: dbmasteruser
+    password: dawon0923
+    driver-calss-name: com.mysql.cj.jdbc.Driver
+  file:
+    dir: /home/ubuntu/test/
+  # dir: C:/test/
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        #       show-sql: true
+        format-sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+
+custom:
+  path:
+    upload-images: '/home/ubuntu/test/'
+    #upload-images: 'C:/test/'
+
+
+
